@@ -1,0 +1,12 @@
+@if(isLoading){
+<div>
+    <app-loading></app-loading>
+</div>
+}@else {
+<div class="grid grid-cols-12 gap-12 p-2">
+    @for (product of productList(); track $index) {
+    <app-card class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3"
+        [productData]="product"></app-card>
+    }
+</div>
+}

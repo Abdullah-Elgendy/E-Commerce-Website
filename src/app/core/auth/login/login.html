@@ -1,0 +1,62 @@
+<div class="signInUI my-12 w-[80%] mx-auto flex gap-4 flex-col lg:flex-row justify-center items-center">
+    <div class="w-full order-2 lg:order-1 lg:w-1/2">
+        <img class="w-full 2xl:w-2/3 2xl:mx-auto" src="images/arranging-files.svg" alt="SingInSvg">
+    </div>
+    <div
+        class="w-full order-1 lg:order-2 lg:w-1/2 mx-auto bg-gray-100 dark:bg-darker rounded-xl px-12 py-6 flex flex-col justify-center">
+        <h1 class="text-4xl font-medium ">Sign In To Fresh<span class="text-main">Cart</span></h1>
+        <form class=" my-8 flex flex-col gap-8" [formGroup]="signInForm" (ngSubmit)="submitForm()">
+            <div class="inputGroup">
+                <div class="relative">
+                    <input type="email" id="email" formControlName="email"
+                        class="block px-2.5 pb-2.5 pt-4 w-full text-md text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-main focus:outline-none focus:ring-0 focus:border-main peer"
+                        placeholder=" " />
+                    <label for="email"
+                        class="absolute rounded-lg text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-gray-100 dark:bg-darker px-2 peer-focus:px-2 peer-focus:text-mainborder-main peer-focus:dark:text-mainborder-main peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Email</label>
+                </div>
+                <!-- validation email -->
+                @if (signInForm.get('email')?.errors && signInForm.get('email')?.touched) {
+                <div class="errorMsg text-red-700 mt-2">
+                    @if (signInForm.get('email')?.getError('required')) {
+                    <p class="capitalize">email is required</p>}
+                    @if (signInForm.get('email')?.getError('email')) {
+                    <p class="capitalize">email must be valid</p>
+                    }
+                </div>}
+            </div>
+            <div class="inputGroup">
+                <div class="relative">
+                    <input #inputPass type="password" id="password" formControlName="password"
+                        class="block px-2.5 pb-2.5 pt-4 w-full text-md text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-main focus:outline-none focus:ring-0 focus:border-main peer"
+                        placeholder=" " />
+                    <a (click)="togglePass()" class="absolute cursor-pointer end-4 bottom-[50%] translate-y-[50%]">
+                        <i #showPass class="fa-eye"></i>
+                        <i #hidePass class="fa-solid fa-eye-slash"></i>
+                    </a>
+                    <label for="password"
+                        class="absolute rounded-lg text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-gray-100 dark:bg-darker px-2 peer-focus:px-2 peer-focus:text-mainborder-main peer-focus:dark:text-mainborder-main peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Password</label>
+                </div>
+                <!-- validation password -->
+                @if (signInForm.get('password')?.errors && signInForm.get('password')?.touched) {
+                <div class="errorMsg text-red-700 mt-2">
+                    @if (signInForm.get('password')?.getError('required')) {
+                    <p class="capitalize">password is required</p>}
+                </div>}
+            </div>
+            @if(errorMsg){
+            <p class="capitalize text-center text-red-700">{{errorMsg}}</p>
+            }
+            <button
+                class="capitalize cursor-pointer outline-2 outline-main hover:bg-main hover:text-white rounded-xl px-0.5 py-3 transition-all duration-400">Sign
+                In
+                @if(isLoading){
+                <i class="fa-solid fa-spin fa-spinner"></i> }</button>
+            <div class="linksGroup">
+                <p class="">Don't Have An Account? <a class="text-main font-bold" routerLink="/signup">Sign
+                        Up</a></p>
+                <a class="text-main font-bold" routerLink="/resetPassword">Forgot Password</a>
+            </div>
+
+        </form>
+    </div>
+</div>

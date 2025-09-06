@@ -1,13 +1,24 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>ECommerce</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- determines whether the system uses dark or light mode -->
+  <script>
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  </script>
 </head>
-<body>
+
+<body class="relative dark:bg-dark dark:text-gray-100 bg-[url('/images/imgi_50_light-patten-DfaqEfwF.svg')]">
   <app-root></app-root>
 </body>
+
 </html>

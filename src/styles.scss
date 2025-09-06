@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+@theme {
+  --color-main: #63e6be;
+  --color-darker: #28262e;
+  --color-darker-700: #38363f;
+  --color-dark: #45434d;
+  --breakpoint-navBreak: 867px;
+}
+
+.active {
+  @apply w-[85%];
+}
