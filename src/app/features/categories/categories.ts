@@ -7,11 +7,10 @@ import {
 } from '@angular/core';
 import { CategoriesService } from '../../core/service/Categories/categories-service';
 import { CategorySlider } from '../category-slider/category-slider';
-import { Loading } from '../../shared/component/loading/loading';
 
 @Component({
   selector: 'app-categories',
-  imports: [CategorySlider, Loading],
+  imports: [CategorySlider],
   templateUrl: './categories.html',
   styleUrl: './categories.scss',
 })

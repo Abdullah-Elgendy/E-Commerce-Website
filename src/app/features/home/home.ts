@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Products } from '../products/products';
 import { Categories } from '../categories/categories';
 import { MainSlider } from '../main-slider/main-slider';
@@ -9,4 +9,6 @@ import { MainSlider } from '../main-slider/main-slider';
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home {}
+export class Home {
+  
+}

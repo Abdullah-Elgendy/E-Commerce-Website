@@ -12,12 +12,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsAPI } from '../../core/service/ProductsAPI/productsAPI';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Loading } from '../../shared/component/loading/loading';
 import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
-  imports: [CarouselModule, Loading, CurrencyPipe],
+  imports: [CarouselModule, CurrencyPipe],
   templateUrl: './product-details.html',
   styleUrl: './product-details.scss',
 })
