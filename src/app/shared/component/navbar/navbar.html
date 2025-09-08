@@ -70,10 +70,17 @@
                 </li>
                 @if(isLoggedIn){
                 <li class="md:mx-0 lg:mx-3 xl:mx-6">
-                    <a routerLink="/cart" routerLinkActive="text-main dark:text-main"
-                        class="flex justify-center relative py-1.5 px-2 text-gray-600 dark:text-gray-100 bg-transparent transition-all duration-300 hover:text-main focus:outline focus:outline-main rounded-sm"
-                        aria-current="page">Cart <div routerLinkActive="active"
-                            class="absolute w-[0%] h-[1px] bg-main transition-all duration-500 bottom-1"></div></a>
+                    <button routerLink="/cart" routerLinkActive="text-main dark:text-main" type="button"
+                        class="flex justify-center relative py-4 px-2 text-gray-600 dark:text-gray-100 bg-transparent transition-all duration-300 hover:text-main focus:outline focus:outline-main rounded-sm">
+                        <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                        <div routerLinkActive="active"
+                            class="absolute w-[0%] h-[1px] bg-main transition-all duration-500 bottom-0"></div>
+                        <span class="sr-only">Notifications</span>
+                        <div
+                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+                            {{cartItemNum}}</div>
+                    </button>
+
                 </li>
                 }
                 <li class="flex flex-row items-center">

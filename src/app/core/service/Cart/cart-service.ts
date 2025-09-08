@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Icart } from '../../../Interfaces/cart/icart';
 
 @Injectable({
@@ -11,8 +11,22 @@ import { Icart } from '../../../Interfaces/cart/icart';
 export class CartService {
   private http = inject(HttpClient);
   private cookie = inject(CookieService);
+  itemsNum: BehaviorSubject<number | undefined> = new BehaviorSubject<
+    number | undefined
+  >(0);
 
-  addToCart(id: string): Observable<any> {
+  constructor() {
+    this.getUserCart().subscribe({
+      next: (res) => {
+        this.itemsNum.next(res.numOfCartItems);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  addToCart(id: string | undefined): Observable<any> {
     return this.http.post(
       `${environment.baseURL}cart`,
       { productId: id },

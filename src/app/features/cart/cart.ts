@@ -1,10 +1,4 @@
-import {
-  Component,
-  inject,
-  OnInit,
-  signal,
-  WritableSignal,
-} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../core/service/Cart/cart-service';
 import { CartProduct, Icart } from '../../Interfaces/cart/icart';
 import { CurrencyPipe } from '@angular/common';
@@ -31,6 +25,7 @@ export class Cart implements OnInit {
         this._cartId = res.cartId;
         this.cartProducts = res.data?.products;
         this.totalPrice = res.data?.totalCartPrice;
+        this.s_cart.itemsNum.next(res.numOfCartItems);
         this.isLoading = false;
       },
       error: (err) => {

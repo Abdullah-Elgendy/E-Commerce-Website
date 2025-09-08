@@ -22,7 +22,7 @@ export class Card {
     this.s_cart.addToCart(id).subscribe({
       next: (res) => {
         this.isLoading = false;
-        console.log(res);
+        this.s_cart.itemsNum.next(res.numOfCartItems);
         this.s_toastr.success(res.message, 'Success');
       },
       error: (err) => {

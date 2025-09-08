@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   Inject,
@@ -11,6 +10,7 @@ import { FlowbiteService } from '../../../core/service/Flowbite/flowbite-service
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SignInService } from '../../../core/service/Auth/SignIn/sign-in-service';
+import { CartService } from '../../../core/service/Cart/cart-service';
 
 @Component({
   selector: 'app-navbar',
@@ -23,11 +23,13 @@ export class Navbar implements OnInit {
   @ViewChild('dark') dark!: ElementRef;
   mode!: String;
   isLoggedIn!: Boolean;
+  cartItemNum!: number | undefined;
 
   constructor(
     @Inject(PLATFORM_ID) platformId: Object,
     private flowbiteService: FlowbiteService,
-    private s_signIn: SignInService
+    private s_signIn: SignInService,
+    private s_cart: CartService
   ) {
     //determines the color theme
     if (isPlatformBrowser(platformId)) {
@@ -50,6 +52,12 @@ export class Navbar implements OnInit {
       },
       error: (err) => {
         console.log('Error', err);
+      },
+    });
+
+    this.s_cart.itemsNum.subscribe({
+      next: (res) => {
+        this.cartItemNum = res;
       },
     });
 

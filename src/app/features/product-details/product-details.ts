@@ -31,8 +31,7 @@ export class ProductDetails implements OnInit {
   private _productsAPI = inject(ProductsAPI);
   private s_cart = inject(CartService);
   private s_toastr = inject(ToastrService);
-  productData: WritableSignal<Partial<SpecificProductData> | undefined> =
-    signal({});
+  productData: WritableSignal<Partial<SpecificProductData>> = signal({});
   productId!: string | null;
   @ViewChild('productCover') coverImg!: ElementRef;
   isLoading: boolean = false;
@@ -62,12 +61,12 @@ export class ProductDetails implements OnInit {
     });
   }
 
-  addProductToCart(id: string) {
+  addProductToCart(id: string | undefined) {
     this.isLoading = true;
     this.s_cart.addToCart(id).subscribe({
       next: (res) => {
         this.isLoading = false;
-        console.log(res);
+        this.s_cart.itemsNum.next(res.numOfCartItems);
         this.s_toastr.success(res.message, 'Success');
       },
       error: (err) => {
@@ -80,7 +79,7 @@ export class ProductDetails implements OnInit {
 
   getData() {
     this._productsAPI.getProductById(this.productId).subscribe({
-      next: (res: Partial<ISpecificProduct>) => {
+      next: (res: any) => {
         this.productData.set(res.data);
       },
       error: (error: any) => {
