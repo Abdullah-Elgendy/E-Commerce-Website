@@ -24,10 +24,14 @@
                 <span><i class="fa-solid fa-star fa-xs"
                         style="color: #FFD43B;"></i>{{productData().ratingsAverage}}</span>
             </div>
-            <button
-                class="capitalize w-[50%] mx-auto cursor-pointer outline-2 outline-main hover:bg-main hover:text-white rounded px-0.5 py-1 transition-all duration-400"><i
-                    class="fa-solid fa-cart-plus me-2"></i>add
-                to cart</button>
+            <button [disabled]="isLoading" (click)="addProductToCart(productData()._id)"
+                class="capitalize w-[50%] mx-auto text-center cursor-pointer outline-2 outline-main hover:bg-main disabled:bg-transparent hover:text-white rounded px-0.5 py-1 transition-all duration-400">
+                @if(isLoading){
+                <i class="fa-solid fa-spin fa-spinner fa-xl"></i>Loading..
+                }@else {
+                <i class="fa-solid fa-cart-plus me-2"></i>add to cart
+                }
+            </button>
         </div>
 
     </div>

@@ -1,3 +1,4 @@
+<!-- search bar -->
 <div class="mb-8">
     <div class="flex max-w-2xl mx-auto">
         <button id="dropdown-button" data-dropdown-toggle="dropdown"
@@ -36,6 +37,7 @@
     </div>
 </div>
 
+<!-- products grid -->
 <div class="grid grid-cols-12 gap-12 p-2">
     @for (product of productList() | search : inputText; track $index) {
     <app-card class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3" [productData]="product"></app-card>

@@ -47,10 +47,9 @@ export class Login {
     if (this.signInForm.valid) {
       this.s_signIn.signInData(this.signInForm.value).subscribe({
         next: (res) => {
-          console.log('response', res);
           //save in cookie, can also save in local storage
           // localStorage.setItem('token', res.token);
-          this.s_cookie.set('token',res.token)
+          this.s_cookie.set('token', res.token);
           //decode token
           this.s_signIn.decodeToken();
           this.router.navigate(['/home']);

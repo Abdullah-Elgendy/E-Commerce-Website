@@ -13,6 +13,12 @@ import { ProductsAPI } from '../../core/service/ProductsAPI/productsAPI';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CurrencyPipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { CartService } from '../../core/service/Cart/cart-service';
+import {
+  ISpecificProduct,
+  SpecificProductData,
+} from '../../Interfaces/products/iproducts';
 
 @Component({
   selector: 'app-product-details',
@@ -23,10 +29,13 @@ import { CurrencyPipe } from '@angular/common';
 export class ProductDetails implements OnInit {
   private activated = inject(ActivatedRoute);
   private _productsAPI = inject(ProductsAPI);
-  productData: WritableSignal<any> = signal({});
+  private s_cart = inject(CartService);
+  private s_toastr = inject(ToastrService);
+  productData: WritableSignal<Partial<SpecificProductData> | undefined> =
+    signal({});
   productId!: string | null;
   @ViewChild('productCover') coverImg!: ElementRef;
-  isLoading = false;
+  isLoading: boolean = false;
 
   customOptions: OwlOptions = {
     loop: true,
@@ -53,14 +62,28 @@ export class ProductDetails implements OnInit {
     });
   }
 
+  addProductToCart(id: string) {
+    this.isLoading = true;
+    this.s_cart.addToCart(id).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        console.log(res);
+        this.s_toastr.success(res.message, 'Success');
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+        this.s_toastr.error(err.error.message, 'Error');
+      },
+    });
+  }
+
   getData() {
     this._productsAPI.getProductById(this.productId).subscribe({
-      next: (res: any) => {
-        this.isLoading = false;
+      next: (res: Partial<ISpecificProduct>) => {
         this.productData.set(res.data);
       },
       error: (error: any) => {
-        this.isLoading = false;
         console.log(error);
       },
     });
@@ -71,7 +94,6 @@ export class ProductDetails implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoading = true;
     this.getProductID();
     this.getData();
   }

@@ -9,6 +9,7 @@ import { ProductsAPI } from '../../core/service/ProductsAPI/productsAPI';
 import { Card } from '../../shared/component/card/card';
 import { FormsModule, ɵInternalFormsSharedModule } from '@angular/forms';
 import { SearchPipe } from '../../shared/pipe/search-pipe';
+import { IAllProducts, ProductData } from '../../Interfaces/products/iproducts';
 
 @Component({
   selector: 'app-products',
@@ -18,26 +19,21 @@ import { SearchPipe } from '../../shared/pipe/search-pipe';
 })
 export class Products implements OnInit {
   private _productsAPI = inject(ProductsAPI);
-  isLoading: Boolean = false;
   inputText: string = '';
-  productList: WritableSignal<any> = signal([]);
+  productList: WritableSignal<ProductData[] | undefined> = signal([]);
 
   getData() {
     this._productsAPI.getAllProducts().subscribe({
-      next: (res: any) => {
-        console.log(res.data);
+      next: (res: Partial<IAllProducts>) => {
         this.productList.set(res.data);
-        this.isLoading = false;
       },
       error: (error: any) => {
         console.log(error);
-        this.isLoading = false;
       },
     });
   }
 
   ngOnInit(): void {
-    this.isLoading = true;
     this.getData();
   }
 }

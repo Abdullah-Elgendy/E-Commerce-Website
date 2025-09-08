@@ -1,6 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductsAPI } from '../../core/service/ProductsAPI/productsAPI';
-import { distinctUntilChanged, filter, find, from, map, of, switchMap } from 'rxjs';
+import {
+  distinctUntilChanged,
+  filter,
+  find,
+  from,
+  map,
+  of,
+  switchMap,
+} from 'rxjs';
 
 @Component({
   selector: 'app-brands',
@@ -8,7 +16,7 @@ import { distinctUntilChanged, filter, find, from, map, of, switchMap } from 'rx
   templateUrl: './brands.html',
   styleUrl: './brands.scss',
 })
-export class Brands{
+export class Brands {
   private s_products = inject(ProductsAPI);
 
   getData() {
@@ -29,5 +37,4 @@ export class Brands{
         },
       });
   }
-
 }
