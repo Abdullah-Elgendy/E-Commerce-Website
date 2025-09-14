@@ -15,10 +15,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CurrencyPipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../core/service/Cart/cart-service';
-import {
-  ISpecificProduct,
-  SpecificProductData,
-} from '../../Interfaces/products/iproducts';
+import { ISpecificProduct, Data } from '../../Interfaces/products/iproducts';
 
 @Component({
   selector: 'app-product-details',
@@ -31,7 +28,7 @@ export class ProductDetails implements OnInit {
   private _productsAPI = inject(ProductsAPI);
   private s_cart = inject(CartService);
   private s_toastr = inject(ToastrService);
-  productData: WritableSignal<Partial<SpecificProductData>> = signal({});
+  productData: WritableSignal<Data> = signal({} as Data);
   productId!: string | null;
   @ViewChild('productCover') coverImg!: ElementRef;
   isLoading: boolean = false;
@@ -79,7 +76,7 @@ export class ProductDetails implements OnInit {
 
   getData() {
     this._productsAPI.getProductById(this.productId).subscribe({
-      next: (res: any) => {
+      next: (res: ISpecificProduct) => {
         this.productData.set(res.data);
       },
       error: (error: any) => {

@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { CategoriesService } from '../../core/service/Categories/categories-service';
 import { CategorySlider } from '../category-slider/category-slider';
+import { Data, Icategories } from '../../Interfaces/categories/icategories';
 
 @Component({
   selector: 'app-categories',
@@ -16,11 +17,11 @@ import { CategorySlider } from '../category-slider/category-slider';
 })
 export class Categories implements OnInit {
   private categoriesSerivce = inject(CategoriesService);
-  categoriesData: WritableSignal<any[]> = signal([]);
+  categoriesData: WritableSignal<Data[]> = signal([]);
 
   getData() {
     this.categoriesSerivce.getCategories().subscribe({
-      next: (res: any) => {
+      next: (res: Icategories) => {
         this.categoriesData.set(res.data);
       },
       error: (err: any) => {

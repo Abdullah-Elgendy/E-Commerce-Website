@@ -3,6 +3,7 @@ import { Component, inject, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../../core/service/Cart/cart-service';
 import { ToastrService } from 'ngx-toastr';
+import { DataList } from '../../../Interfaces/products/iproducts';
 
 @Component({
   selector: 'app-card',
@@ -15,7 +16,7 @@ export class Card {
   private s_toastr = inject(ToastrService);
   isLoading: boolean = false;
 
-  @Input() productData: any;
+  @Input() productData!: DataList;
 
   addProductToCart(id: string) {
     this.isLoading = true;

@@ -1,11 +1,11 @@
 export interface IAllProducts {
   results: number;
   metadata: Metadata;
-  data: ProductData[];
+  data: DataList[];
 }
 
 export interface ISpecificProduct {
-  data: SpecificProductData;
+  data: Data;
 }
 
 export interface Metadata {
@@ -15,8 +15,8 @@ export interface Metadata {
   nextPage: number;
 }
 
-export interface ProductData {
-  sold: number;
+export interface DataList {
+  sold?: number;
   images: string[];
   subcategory: Subcategory[];
   ratingsQuantity: number;
@@ -33,11 +33,30 @@ export interface ProductData {
   createdAt: string;
   updatedAt: string;
   id: string;
+  priceAfterDiscount?: number;
+  availableColors?: any[];
 }
 
-export interface SpecificProductData extends ProductData {
-  __v?: number;
-  reviews?: any[];
+export interface Data {
+  sold: number;
+  images: string[];
+  subcategory: Subcategory[];
+  ratingsQuantity: number;
+  _id: string;
+  title: string;
+  slug: string;
+  description: string;
+  quantity: number;
+  price: number;
+  imageCover: string;
+  category: Category;
+  brand: Brand;
+  ratingsAverage: number;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  reviews: any[];
+  id: string;
 }
 
 export interface Subcategory {
@@ -54,6 +73,9 @@ export interface Category {
   image: string;
 }
 
-// same properties as Category so we extend.
-
-export interface Brand extends Category {}
+export interface Brand {
+  _id: string;
+  name: string;
+  slug: string;
+  image: string;
+}

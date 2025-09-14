@@ -9,7 +9,7 @@ import { ProductsAPI } from '../../core/service/ProductsAPI/productsAPI';
 import { Card } from '../../shared/component/card/card';
 import { FormsModule, ɵInternalFormsSharedModule } from '@angular/forms';
 import { SearchPipe } from '../../shared/pipe/search-pipe';
-import { IAllProducts, ProductData } from '../../Interfaces/products/iproducts';
+import { DataList, IAllProducts } from '../../Interfaces/products/iproducts';
 
 @Component({
   selector: 'app-products',
@@ -20,11 +20,11 @@ import { IAllProducts, ProductData } from '../../Interfaces/products/iproducts';
 export class Products implements OnInit {
   private _productsAPI = inject(ProductsAPI);
   inputText: string = '';
-  productList: WritableSignal<ProductData[] | undefined> = signal([]);
+  productList: WritableSignal<DataList[]> = signal([]);
 
   getData() {
     this._productsAPI.getAllProducts().subscribe({
-      next: (res: Partial<IAllProducts>) => {
+      next: (res: IAllProducts) => {
         this.productList.set(res.data);
       },
       error: (error: any) => {

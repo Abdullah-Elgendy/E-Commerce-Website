@@ -17,7 +17,7 @@
         <h1 class="text-5xl py-2 mb-12 font-medium text-main border-b border-main">{{productData().title}}</h1>
         <div class="details text-[18px] flex flex-col gap-4">
             <p><span class="text-main font-bold">Description: </span> {{productData().description}}</p>
-            <p><span class="text-main font-bold">Category: </span> {{productData().category?.name}}</p>
+            <p><span class="text-main font-bold">Category: </span> {{productData().category.name}}</p>
             <div class="infogroup flex justify-between py-2">
                 <p><span class="text-main font-bold">Price: </span>{{productData().price | currency:"EGP " : "EGP " :
                     "2.1-3"}}</p>

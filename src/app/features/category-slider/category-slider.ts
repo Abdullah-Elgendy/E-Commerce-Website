@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { Data } from '../../Interfaces/categories/icategories';
 
 @Component({
   selector: 'app-category-slider',
@@ -9,7 +10,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
   styleUrl: './category-slider.scss',
 })
 export class CategorySlider {
-  @Input() slideData!: any;
+  @Input() slideData!: Data[];
 
   customOptions: OwlOptions = {
     loop: true,
@@ -32,14 +33,13 @@ export class CategorySlider {
       940: {
         items: 4,
       },
-      1280:{
+      1280: {
         items: 5,
       },
-      1536:{
+      1536: {
         items: 7,
       },
     },
     nav: true,
   };
-
 }

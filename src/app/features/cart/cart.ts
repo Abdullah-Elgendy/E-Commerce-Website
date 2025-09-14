@@ -15,16 +15,16 @@ export class Cart implements OnInit {
   private s_toast = inject(ToastrService);
   isLoading: boolean = false;
   _cartId!: string | undefined;
-  cartProducts: CartProduct[] | undefined = [];
+  cartProducts: CartProduct[] = [];
   totalPrice: number | undefined = 0;
 
   getCartProducts() {
     this.isLoading = true;
     this.s_cart.getUserCart().subscribe({
-      next: (res: Partial<Icart>) => {
+      next: (res: Icart) => {
         this._cartId = res.cartId;
-        this.cartProducts = res.data?.products;
-        this.totalPrice = res.data?.totalCartPrice;
+        this.cartProducts = res.data.products;
+        this.totalPrice = res.data.totalCartPrice;
         this.s_cart.itemsNum.next(res.numOfCartItems);
         this.isLoading = false;
       },

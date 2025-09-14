@@ -36,7 +36,7 @@ export class CartService {
     );
   }
 
-  getUserCart(): Observable<Partial<Icart>> {
+  getUserCart(): Observable<any> {
     return this.http.get(`${environment.baseURL}cart`, {
       headers: { token: this.cookie.get('token') },
     });
