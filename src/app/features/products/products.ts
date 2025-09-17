@@ -10,6 +10,7 @@ import { Card } from '../../shared/component/card/card';
 import { FormsModule, ɵInternalFormsSharedModule } from '@angular/forms';
 import { SearchPipe } from '../../shared/pipe/search-pipe';
 import { DataList, IAllProducts } from '../../Interfaces/products/iproducts';
+import { FlowbiteService } from '../../core/service/Flowbite/flowbite-service';
 
 @Component({
   selector: 'app-products',
@@ -19,6 +20,7 @@ import { DataList, IAllProducts } from '../../Interfaces/products/iproducts';
 })
 export class Products implements OnInit {
   private _productsAPI = inject(ProductsAPI);
+  private s_flowbite = inject(FlowbiteService)
   inputText: string = '';
   productList: WritableSignal<DataList[]> = signal([]);
 
@@ -35,5 +37,8 @@ export class Products implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+    this.s_flowbite.loadFlowbite((flowbite)=>{
+      flowbite.initFlowbite();
+    })
   }
 }

@@ -11,6 +11,10 @@ import { NotFoundPage } from './features/not-found-page/not-found-page';
 import { authGuard } from './core/guard/auth-guard';
 import { loggedInGuard } from './core/guard/logged-in-guard';
 import { ResetPasswordComponent } from './core/auth/reset-password-component/reset-password-component';
+import { CheckOut } from './features/check-out/check-out';
+import { shippingGuard } from './core/guard/shipping-guard';
+import { CashOrder } from './features/cash-order/cash-order';
+import { Allorders } from './features/allorders/allorders';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -28,6 +32,17 @@ export const routes: Routes = [
     component: ProductDetails,
     canActivate: [authGuard],
   },
+  {
+    path: 'checkout/:id',
+    component: CheckOut,
+    canActivate: [authGuard, shippingGuard],
+  },
+  {
+    path: 'cashorder/:id',
+    component: CashOrder,
+    canActivate: [authGuard, shippingGuard],
+  },
+  { path: 'allorders', component: Allorders, canActivate: [authGuard] },
   { path: 'categories', component: Categories, canActivate: [authGuard] },
   { path: 'brands', component: Brands, canActivate: [authGuard] },
   { path: 'cart', component: Cart, canActivate: [authGuard] },

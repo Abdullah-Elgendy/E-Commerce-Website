@@ -13,12 +13,12 @@ import { CartService } from '../../core/service/Cart/cart-service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-check-out',
+  selector: 'app-cash-order',
   imports: [FormsModule, ReactiveFormsModule],
-  templateUrl: './check-out.html',
-  styleUrl: './check-out.scss',
+  templateUrl: './cash-order.html',
+  styleUrl: './cash-order.scss',
 })
-export class CheckOut implements OnInit {
+export class CashOrder implements OnInit {
   readonly egyptianCities: string[] = [
     'Cairo',
     'Alexandria',
@@ -84,17 +84,14 @@ export class CheckOut implements OnInit {
     this.isLoading = true;
     if (this.addressForm.valid) {
       this.s_orders
-        .createCheckoutSession(this.addressForm.value, this.cartId)
+        .createCashOrder(this.addressForm.value, this.cartId)
         .subscribe({
           next: (res) => {
             this.isLoading = false;
             console.log(res);
             this.s_cart.itemsNum.next(0);
-            if (res.status === 'success') {
-              window.location.href = res.session.url;
-            } else {
-              window.location.href = res.session.cancel_url;
-            }
+            this.s_toast.success('Order Placed Successfully!', 'Success');
+            this.router.navigate(['/home']);
           },
           error: (err) => {
             this.isLoading = false;
