@@ -1,28 +1,64 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { SignInService } from '../../core/service/Auth/SignIn/sign-in-service';
 import { Ordersservice } from '../../core/service/Orders/ordersservice';
+import { RouterLink } from '@angular/router';
+import { IAllOrders } from '../../Interfaces/allorders/allorders';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { CartProduct } from '../../Interfaces/cart/icart';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-allorders',
-  imports: [],
+  imports: [RouterLink, DatePipe, CurrencyPipe],
   templateUrl: './allorders.html',
   styleUrl: './allorders.scss',
+  animations: [
+    trigger('fadeAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('0.5s ease-in', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [style({ opacity: 0 })]),
+    ]),
+  ],
 })
 export class Allorders implements OnInit {
   private s_signIn = inject(SignInService);
   private s_orders = inject(Ordersservice);
+  ordersList: WritableSignal<IAllOrders[]> = signal([]);
+  numOfOrders!: number;
+  orderId!: number;
+  cartItems: CartProduct[] = [];
 
   getOrders() {
     this.s_orders
       .getUserOrders(this.s_signIn.userData.getValue()?.id)
       .subscribe({
-        next: (res) => {
-          console.log(res);
+        next: (res: IAllOrders[]) => {
+          this.ordersList.set(res);
+          console.log(this.ordersList.length);
+          this.numOfOrders = this.ordersList().length;
+          console.log(this.ordersList());
         },
         error: (err) => {
           console.log(err);
         },
       });
+  }
+
+  viewOrder(items: CartProduct[], id: number) {
+    this.orderId = id;
+    this.cartItems = items;
+  }
+
+  closeOrder() {
+    this.cartItems = [];
   }
 
   ngOnInit(): void {

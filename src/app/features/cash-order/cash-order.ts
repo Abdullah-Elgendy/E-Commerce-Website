@@ -91,7 +91,7 @@ export class CashOrder implements OnInit {
             console.log(res);
             this.s_cart.itemsNum.next(0);
             this.s_toast.success('Order Placed Successfully!', 'Success');
-            this.router.navigate(['/home']);
+            this.router.navigate(['/allorders']);
           },
           error: (err) => {
             this.isLoading = false;

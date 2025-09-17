@@ -42,7 +42,11 @@ export const routes: Routes = [
     component: CashOrder,
     canActivate: [authGuard, shippingGuard],
   },
-  { path: 'allorders', component: Allorders, canActivate: [authGuard] },
+  {
+    path: 'allorders',
+    component: Allorders,
+    canActivate: [authGuard],
+  },
   { path: 'categories', component: Categories, canActivate: [authGuard] },
   { path: 'brands', component: Brands, canActivate: [authGuard] },
   { path: 'cart', component: Cart, canActivate: [authGuard] },
