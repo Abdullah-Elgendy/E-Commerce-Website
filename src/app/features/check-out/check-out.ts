@@ -10,7 +10,6 @@ import { Ordersservice } from '../../core/service/Orders/ordersservice';
 import { FlowbiteService } from '../../core/service/Flowbite/flowbite-service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CartService } from '../../core/service/Cart/cart-service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-check-out',
@@ -62,7 +61,6 @@ export class CheckOut implements OnInit {
   ];
   private s_flowbite = inject(FlowbiteService);
   private s_orders = inject(Ordersservice);
-  private s_toast = inject(ToastrService);
   private s_cart = inject(CartService);
   private activeRoute = inject(ActivatedRoute);
   private router = inject(Router);
