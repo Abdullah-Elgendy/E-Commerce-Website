@@ -12,10 +12,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SignInService } from '../../../core/service/Auth/SignIn/sign-in-service';
 import { CartService } from '../../../core/service/Cart/cart-service';
 import { IPayLoad } from '../../../Interfaces/auth/isign-in';
+import { ScrollNav } from '../../directives/scroll-nav';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, ScrollNav],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })

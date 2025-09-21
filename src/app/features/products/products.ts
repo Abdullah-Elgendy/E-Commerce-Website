@@ -12,7 +12,7 @@ import { SearchPipe } from '../../shared/pipe/search-pipe';
 import {
   Data,
   DataList,
-  IAllProducts,
+  IAllData,
 } from '../../Interfaces/products/iproducts';
 import { FlowbiteService } from '../../core/service/Flowbite/flowbite-service';
 import { IWishList } from '../../Interfaces/wishlist/wishlist';
@@ -36,7 +36,7 @@ export class Products implements OnInit {
 
   getData() {
     this._productsAPI.getAllProducts().subscribe({
-      next: (res: IAllProducts) => {
+      next: (res: IAllData) => {
         this.productList.set(res.data);
       },
       error: (error: any) => {

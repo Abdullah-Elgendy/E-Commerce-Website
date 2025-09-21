@@ -1,6 +1,6 @@
 <div
     class="p-6 group/card overflow-hidden cursor-pointer rounded shadow outline outline-gray-200 bg-gray-100 dark:bg-darker-700 dark:outline-dark dark:shadow-none hover:outline hover:outline-main/70 transition-color duration-200">
-    <div class="productinfo relative flex flex-col gap-3">
+    <div class="productinfo relative flex flex-wrap flex-col gap-3">
         <div class="info" [routerLink]="['/productDetails',productData._id]">
             <div class="productimg rounded outline outline-dark/10 dark:outline-gray-200 mb-2">
                 <img class="max-w-full h-auto" [src]="productData.imageCover" alt="">
@@ -15,7 +15,7 @@
                         style="color: #FFD43B;"></i>{{productData.ratingsAverage}}</span>
             </div>
         </div>
-        <div class="btnsGroup flex gap-4 justify-between items-center flex-wrap">
+        <div class="btnsGroup flex gap-2 justify-between items-center">
             <button [disabled]="isLoading" (click)="addProductToCart(productData._id)"
                 class="capitalize grow text-center relative bottom-[-50px] opacity-0 cursor-pointer outline-2 group-hover/card:bottom-0 group-hover/card:opacity-100 outline-main hover:bg-main disabled:bg-transparent hover:text-white rounded px-0.5 py-1 transition-all duration-400">
                 @if(isLoading){

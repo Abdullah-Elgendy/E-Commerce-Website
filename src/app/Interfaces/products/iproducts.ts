@@ -1,4 +1,4 @@
-export interface IAllProducts {
+export interface IAllData {
   results: number;
   metadata: Metadata;
   data: DataList[];

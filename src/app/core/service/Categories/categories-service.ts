@@ -3,16 +3,14 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoriesService {
-  
   private http = inject(HttpClient);
 
-  getCategories(): Observable<any>{
+  getCategories(): Observable<any> {
     return this.http.get(`${environment.baseURL}categories`);
   }
-  
+
 }

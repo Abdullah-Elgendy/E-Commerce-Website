@@ -1,6 +1,6 @@
 <div class="p-6 outline rounded outline-dark/15 bg-gray-100 dark:bg-darker-700 outline-none">
     <owl-carousel-o [options]="customOptions">
-        @for (slide of slideData; track slide._id) {
+        @for (slide of slideData(); track slide._id) {
         <ng-template carouselSlide [id]="slide._id">
             <div id="categoryCard" class="cursor-pointer">
                 <div class="w-full inline-block">
@@ -8,7 +8,6 @@
                         [title]="slide.name">
                     <p class="text-center text-lg font-medium">{{slide.name}}</p>
                 </div>
-
             </div>
         </ng-template>}
     </owl-carousel-o>

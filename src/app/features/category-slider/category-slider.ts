@@ -1,7 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { Data } from '../../Interfaces/categories/icategories';
+import { Data, Icategories } from '../../Interfaces/categories/icategories';
+import { CategoriesService } from '../../core/service/Categories/categories-service';
 
 @Component({
   selector: 'app-category-slider',
@@ -10,7 +18,22 @@ import { Data } from '../../Interfaces/categories/icategories';
   styleUrl: './category-slider.scss',
 })
 export class CategorySlider {
-  @Input() slideData!: Data[];
+  slideData: WritableSignal<Data[]> = signal([]);
+  private s_categories = inject(CategoriesService);
+  getData() {
+    this.s_categories.getCategories().subscribe({
+      next: (res: Icategories) => {
+        this.slideData.set(res.data);
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
+
+  ngOnInit(): void {
+    this.getData();
+  }
 
   customOptions: OwlOptions = {
     loop: true,
