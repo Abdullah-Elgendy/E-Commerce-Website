@@ -15,6 +15,7 @@ import { CheckOut } from './features/check-out/check-out';
 import { shippingGuard } from './core/guard/shipping-guard';
 import { CashOrder } from './features/cash-order/cash-order';
 import { Allorders } from './features/allorders/allorders';
+import { Wishlist } from './features/wishlist/wishlist';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -30,6 +31,11 @@ export const routes: Routes = [
   {
     path: 'productDetails/:id',
     component: ProductDetails,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'wishlist',
+    component: Wishlist,
     canActivate: [authGuard],
   },
   {

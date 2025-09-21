@@ -16,6 +16,9 @@ import { CurrencyPipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../core/service/Cart/cart-service';
 import { ISpecificProduct, Data } from '../../Interfaces/products/iproducts';
+import { IWishList } from '../../Interfaces/wishlist/wishlist';
+import { CookieService } from 'ngx-cookie-service';
+import { Wishlistservice } from '../../core/service/Wishlist/wishlistservice';
 
 @Component({
   selector: 'app-product-details',
@@ -28,10 +31,15 @@ export class ProductDetails implements OnInit {
   private _productsAPI = inject(ProductsAPI);
   private s_cart = inject(CartService);
   private s_toastr = inject(ToastrService);
+  private s_cookie = inject(CookieService);
+  private s_wishlist = inject(Wishlistservice);
   productData: WritableSignal<Data> = signal({} as Data);
   productId!: string | null;
+  favorite: boolean = false;
   @ViewChild('productCover') coverImg!: ElementRef;
+  @ViewChild('wishlistEl') wishlistEl!: ElementRef;
   isLoading: boolean = false;
+  list: Data[] = [];
 
   customOptions: OwlOptions = {
     loop: true,
@@ -69,9 +77,32 @@ export class ProductDetails implements OnInit {
       error: (err) => {
         this.isLoading = false;
         console.log(err);
-        this.s_toastr.error(err.error.message, 'Error');
       },
     });
+  }
+
+  addToWishlist(id: string) {
+    if (!this.favorite) {
+      this.s_wishlist.addProductToWishlist(id).subscribe({
+        next: (res) => {
+          this.s_toastr.success(res.message, 'Success');
+          this.favorite = true;
+        },
+      });
+    } else if (this.favorite) {
+      this.s_wishlist.removeProductFromWishlist(id).subscribe({
+        next: (res) => {
+          this.s_toastr.success(
+            'Product removed successfully from your wishlist',
+            'Success'
+          );
+          this.favorite = false;
+        },
+      });
+    }
+    this.wishlistEl.nativeElement.classList.toggle('fa-solid');
+    this.wishlistEl.nativeElement.classList.toggle('fa-regular');
+    this.wishlistEl.nativeElement.classList.toggle('text-red-500');
   }
 
   getData() {
@@ -85,6 +116,22 @@ export class ProductDetails implements OnInit {
     });
   }
 
+  getList() {
+    if (this.s_cookie.get('token')) {
+      this.s_wishlist.getUserWishlist().subscribe({
+        next: (res: IWishList) => {
+          this.list = res.data;
+          //if the product id is in the wishList then its favorited
+          if (
+            this.list?.some((product) => product.id === this.productData().id)
+          ) {
+            this.favorite = true;
+          }
+        },
+      });
+    }
+  }
+
   swapImage(url: string) {
     this.coverImg.nativeElement.setAttribute('src', url);
   }
@@ -92,5 +139,6 @@ export class ProductDetails implements OnInit {
   ngOnInit(): void {
     this.getProductID();
     this.getData();
+    this.getList();
   }
 }

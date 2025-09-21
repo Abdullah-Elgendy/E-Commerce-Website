@@ -35,19 +35,21 @@ export class Allorders implements OnInit {
   numOfOrders!: number;
   orderId!: number;
   cartItems: CartProduct[] = [];
+  isLoading: Boolean = false;
 
   getOrders() {
+    this.isLoading = true;
     this.s_orders
       .getUserOrders(this.s_signIn.userData.getValue()?.id)
       .subscribe({
         next: (res: IAllOrders[]) => {
           this.ordersList.set(res);
-          console.log(this.ordersList.length);
           this.numOfOrders = this.ordersList().length;
-          console.log(this.ordersList());
+          this.isLoading = false;
         },
         error: (err) => {
           console.log(err);
+          this.isLoading = false;
         },
       });
   }

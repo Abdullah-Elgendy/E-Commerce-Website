@@ -11,6 +11,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SignInService } from '../../../core/service/Auth/SignIn/sign-in-service';
 import { CartService } from '../../../core/service/Cart/cart-service';
+import { IPayLoad } from '../../../Interfaces/auth/isign-in';
 
 @Component({
   selector: 'app-navbar',
@@ -23,6 +24,7 @@ export class Navbar implements OnInit {
   @ViewChild('dark') dark!: ElementRef;
   mode!: String;
   isLoggedIn!: Boolean;
+  user!: IPayLoad | null;
   cartItemNum!: number | undefined;
 
   constructor(
@@ -46,8 +48,10 @@ export class Navbar implements OnInit {
       next: (res) => {
         if (res !== null) {
           this.isLoggedIn = true;
+          this.user = res;
         } else {
           this.isLoggedIn = false;
+          this.user = null;
         }
       },
       error: (err) => {

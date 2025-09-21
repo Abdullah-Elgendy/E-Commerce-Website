@@ -3,7 +3,7 @@ import { CartService } from '../../core/service/Cart/cart-service';
 import { CartProduct, Icart } from '../../Interfaces/cart/icart';
 import { CurrencyPipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
-import { RouterLink } from "@angular/router"
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -51,6 +51,7 @@ export class Cart implements OnInit {
   }
 
   updateCartProduct(id: string, count: number) {
+    this.isLoading = true;
     this.s_cart.updateCart(id, count).subscribe({
       next: (res) => {
         this.getCartProducts();

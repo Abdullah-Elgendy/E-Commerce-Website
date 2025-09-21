@@ -1,11 +1,12 @@
 <nav
     class="bg-gray-100 shadow-md fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-darker dark:bg-darker dark:text-white lg:text-lg xl:text-xl">
-    <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <div class="max-w-7xl flex justify-between lg:justify-around flex-wrap items-center mx-auto p-4">
         <a routerLink="/home" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="images/shopping-cart-svg.svg" class="h-8" alt="FreshCart Logo">
             <span class="self-center text-3xl font-semibold whitespace-nowrap">Fresh<span
                     class="text-main">Cart</span></span>
         </a>
+        <!-- theme, login/register and profile -->
         <div class="flex min-navBreak:order-2 space-x-3 min-navBreak:space-x-2 rtl:space-x-reverse dark:text-white">
             <button (click)="toggleMode()" class="me-3">
                 @if (mode == 'dark') {
@@ -24,11 +25,6 @@
             <button routerLink="/signup" type="button"
                 class="text-gray-600 dark:text-gray-100 bg-transparent border-2 border-main transition-color duration-300 hover:bg-main hover:text-white font-medium rounded-lg text-lg md:md:text-sm px-3 py-2 text-center cursor-pointer">Register</button>
             }
-            @if(isLoggedIn){
-            <button (click)="logOut()" type="button"
-                class="text-gray-600 dark:text-gray-100 bg-transparent border-2 border-red-400 transition-color duration-300 hover:bg-red-400 hover:text-white font-medium rounded-lg text-lg md:md:text-sm px-3 py-2 text-center cursor-pointer">Log
-                Out</button>
-            }
             <button data-collapse-toggle="navbar-sticky" type="button"
                 class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg min-navBreak:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 aria-controls="navbar-sticky" aria-expanded="false">
@@ -39,8 +35,71 @@
                         d="M1 1h15M1 7h15M1 13h15" />
                 </svg>
             </button>
+            @if(isLoggedIn){
+            <!-- user profile -->
+            <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                <button type="button"
+                    class="flex relative text-sm bg-gray-50 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
+                    data-dropdown-placement="bottom">
+                    <span class="sr-only">Open user menu</span>
+                    <img class="w-8 h-8 rounded-full cursor-pointer" src="images/profile.svg" alt="user photo">
+                    <span class="sr-only">Notifications</span>
+                    @if(cartItemNum !== 0){
+                    <div
+                        class="absolute inline-flex items-center justify-center w-5 h-5 text-[10px] text-white bg-red-500 border-2 border-white rounded-full bottom-5 start-5 dark:border-gray-900">
+                        {{cartItemNum}}</div>
+                    }
+                </button>
+                <!-- Dropdown menu -->
+                <div class="z-50 my-4 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-dark dark:divide-gray-600"
+                    id="user-dropdown">
+                    <div class="py-3 px-8 flex gap-2">
+                        <img class="bg-gray-50 rounded-full" src="images/profile.svg" alt="">
+                        <span class="block text-sm text-gray-900 dark:text-white">{{user?.name}}</span>
+                    </div>
+                    <ul class="py-2" aria-labelledby="user-menu-button">
+                        <li>
+                            <a routerLink="/cart" routerLinkActive="text-main dark:text-main" type="button"
+                                class="block cursor-pointer px-4 py-2 transition-all duration-300 hover:bg-gray-100 hover:text-main dark:hover:bg-[#6a6873] text-sm text-gray-700 dark:text-gray-200 relative bg-transparent focus:outline focus:outline-main">
+                                <span class="text-sm">My Cart</span>
+                                <span class="icon relative ms-1"><i class="fa-solid fa-cart-shopping fa-xs"></i>
+                                    <span class="sr-only">Notifications</span>
+                                    @if(cartItemNum === 0){
+                                    <div
+                                        class="absolute inline-flex items-center justify-center w-5 h-5 text-[10px] text-white bg-gray-500 border-2 border-white rounded-full bottom-2 start-3 dark:border-none">
+                                        {{cartItemNum}}</div>
+                                    }@else {
+                                    <div
+                                        class="absolute inline-flex items-center justify-center w-5 h-5 text-[10px] text-white bg-red-500 border-2 border-white rounded-full bottom-2 start-3 dark:border-gray-900">
+                                        {{cartItemNum}}</div>
+                                    }
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/allorders"
+                                class="block cursor-pointer px-4 py-2 transition-all duration-300 hover:bg-gray-100 hover:text-main dark:hover:bg-[#6a6873] text-sm text-gray-700 dark:text-gray-200">My
+                                Orders <i class="fa-solid fa-clipboard-list fa-xs"></i></a>
+                        </li>
+                        <li>
+                            <a routerLink="/wishlist"
+                                class="block cursor-pointer px-4 py-2 transition-all duration-300 hover:bg-gray-100 hover:text-main dark:hover:bg-[#6a6873] text-sm text-gray-700 dark:text-gray-200">My
+                                Wishlist <i class="fa-solid fa-heart fa-xs"></i></a>
+                        </li>
+                        <li>
+                            <a (click)="logOut()" type="button"
+                                class="block cursor-pointer px-4 py-2 transition-all duration-300 hover:bg-red-500/75 hover:text-white text-sm text-gray-700 dark:text-gray-200">Log
+                                Out <i class="fa-solid fa-right-from-bracket fa-xs"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            }
         </div>
-        <div class="items-center justify-between hidden w-full min-navBreak:flex min-navBreak:w-auto min-navBreak:order-1"
+
+        <!-- nav list -->
+        <div class="items-center hidden w-full min-navBreak:flex min-navBreak:w-auto min-navBreak:order-1"
             id="navbar-sticky">
             <ul
                 class="flex flex-col items-center p-4 min-navBreak:p-0 mt-4 font-medium rounded-lg min-navBreak:space-x-4 lg:space-x-6 rtl:space-x-reverse min-navBreak:flex-row min-navBreak:mt-0 min-navBreak:border-0">
@@ -68,21 +127,6 @@
                         aria-current="page">Categories <div routerLinkActive="active"
                             class="absolute w-[0%] h-[1px] bg-main transition-all duration-500 bottom-1"></div></a>
                 </li>
-                @if(isLoggedIn){
-                <li class="md:mx-0 lg:mx-3 xl:mx-6">
-                    <button routerLink="/cart" routerLinkActive="text-main dark:text-main" type="button"
-                        class="flex cursor-pointer justify-center relative py-4 px-2 text-gray-600 dark:text-gray-100 bg-transparent transition-all duration-300 hover:text-main focus:outline focus:outline-main rounded-sm">
-                        <i class="fa-solid fa-cart-shopping fa-lg"></i>
-                        <div routerLinkActive="active"
-                            class="absolute w-[0%] h-[1px] bg-main transition-all duration-500 bottom-0"></div>
-                        <span class="sr-only">Notifications</span>
-                        <div
-                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                            {{cartItemNum}}</div>
-                    </button>
-
-                </li>
-                }
                 <li class="flex flex-row items-center">
                     <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" href="#"
                         class="cursor-pointer block py-1.5 px-2 text-gray-600 dark:text-gray-100 bg-transparent transition-all duration-300 hover:text-main focus:outline focus:outline-main rounded-sm"
@@ -94,32 +138,32 @@
 
                     <!-- Socials dropdown menu -->
                     <div id="dropdownNavbar"
-                        class="z-10 hidden font-normal bg-gray-100 rounded-2xl shadow-sm w-36 dark:bg-darker">
-                        <ul class="text-center divide-y divide-gray-200 text-sm text-gray-600 dark:divide-[#3c3944] dark:text-white"
+                        class="z-10 hidden font-normal bg-white rounded-2xl shadow-sm w-36 dark:bg-dark">
+                        <ul class="text-center divide-y divide-gray-100 text-sm text-gray-600 dark:divide-[#3c3944] dark:text-white"
                             aria-labelledby="dropdownLargeButton">
                             <li>
                                 <a href="#"
-                                    class="block px-4 py-2 transition-all duration-300 hover:bg-white hover:text-main dark:hover:bg-[#45434d] first:rounded-t-2xl"><i
+                                    class="block px-4 py-2 transition-all duration-300 hover:bg-gray-100 hover:text-main dark:hover:bg-[#6a6873] first:rounded-t-2xl"><i
                                         class="fa-brands fa-instagram fa-lg"></i></a>
                             </li>
                             <li>
                                 <a href="#"
-                                    class="block px-4 py-2 transition-all duration-300 hover:bg-white hover:text-main dark:hover:bg-[#45434d]"><i
+                                    class="block px-4 py-2 transition-all duration-300 hover:bg-gray-100 hover:text-main dark:hover:bg-[#6a6873]"><i
                                         class="fa-brands fa-tiktok fa-lg"></i></a>
                             </li>
                             <li>
                                 <a href="#"
-                                    class="block px-4 py-2 transition-all duration-300 hover:bg-white hover:text-main dark:hover:bg-[#45434d]"><i
+                                    class="block px-4 py-2 transition-all duration-300 hover:bg-gray-100 hover:text-main dark:hover:bg-[#6a6873]"><i
                                         class="fa-brands fa-twitter fa-lg"></i></a>
                             </li>
                             <li>
                                 <a href="#"
-                                    class="block px-4 py-2 transition-all duration-300 hover:bg-white hover:text-main dark:hover:bg-[#45434d]"><i
+                                    class="block px-4 py-2 transition-all duration-300 hover:bg-gray-100 hover:text-main dark:hover:bg-[#6a6873]"><i
                                         class="fa-brands fa-linkedin fa-lg"></i></a>
                             </li>
                             <li>
                                 <a href="#"
-                                    class="block px-4 py-2 transition-all duration-300 hover:bg-white hover:text-main dark:hover:bg-[#45434d] last:rounded-b-2xl"><i
+                                    class="block px-4 py-2 transition-all duration-300 hover:bg-gray-100 hover:text-main dark:hover:bg-[#6a6873] last:rounded-b-2xl"><i
                                         class="fa-brands fa-youtube fa-lg"></i></a>
                             </li>
                         </ul>

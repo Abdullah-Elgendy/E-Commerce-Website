@@ -9,8 +9,15 @@ import { ProductsAPI } from '../../core/service/ProductsAPI/productsAPI';
 import { Card } from '../../shared/component/card/card';
 import { FormsModule, ɵInternalFormsSharedModule } from '@angular/forms';
 import { SearchPipe } from '../../shared/pipe/search-pipe';
-import { DataList, IAllProducts } from '../../Interfaces/products/iproducts';
+import {
+  Data,
+  DataList,
+  IAllProducts,
+} from '../../Interfaces/products/iproducts';
 import { FlowbiteService } from '../../core/service/Flowbite/flowbite-service';
+import { IWishList } from '../../Interfaces/wishlist/wishlist';
+import { CookieService } from 'ngx-cookie-service';
+import { Wishlistservice } from '../../core/service/Wishlist/wishlistservice';
 
 @Component({
   selector: 'app-products',
@@ -20,9 +27,12 @@ import { FlowbiteService } from '../../core/service/Flowbite/flowbite-service';
 })
 export class Products implements OnInit {
   private _productsAPI = inject(ProductsAPI);
-  private s_flowbite = inject(FlowbiteService)
+  private s_flowbite = inject(FlowbiteService);
   inputText: string = '';
   productList: WritableSignal<DataList[]> = signal([]);
+  private s_cookie = inject(CookieService);
+  s_wishlist = inject(Wishlistservice);
+  list: Data[] = [];
 
   getData() {
     this._productsAPI.getAllProducts().subscribe({
@@ -35,10 +45,21 @@ export class Products implements OnInit {
     });
   }
 
+  getList() {
+    if (this.s_cookie.get('token')) {
+      this.s_wishlist.getUserWishlist().subscribe({
+        next: (res: IWishList) => {
+          this.list = res.data;
+        },
+      });
+    }
+  }
+
   ngOnInit(): void {
     this.getData();
-    this.s_flowbite.loadFlowbite((flowbite)=>{
+    this.getList();
+    this.s_flowbite.loadFlowbite((flowbite) => {
       flowbite.initFlowbite();
-    })
+    });
   }
 }

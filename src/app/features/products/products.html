@@ -40,7 +40,8 @@
 <!-- products grid -->
 <div class="grid grid-cols-12 gap-12 p-2">
     @for (product of productList() | search : inputText; track $index) {
-    <app-card class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3" [productData]="product"></app-card>
+    <app-card class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3" [productData]="product"
+        [wishList]="list"></app-card>
     }@empty {
     <p class="col-span-12 my-12"> No Results.. </p>
     }
