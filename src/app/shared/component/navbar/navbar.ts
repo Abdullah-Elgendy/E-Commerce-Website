@@ -36,7 +36,7 @@ export class Navbar implements OnInit {
   ) {
     //determines the color theme
     if (isPlatformBrowser(platformId)) {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      if (localStorage.getItem('theme') === 'dark') {
         this.mode = 'dark';
       } else {
         this.mode = 'light';
@@ -76,6 +76,11 @@ export class Navbar implements OnInit {
     this.light.nativeElement.classList.toggle('fa-solid');
     this.dark.nativeElement.classList.toggle('fa-solid');
     document.documentElement.classList.toggle('dark');
+    if (document.documentElement.classList.contains('dark')) {
+      localStorage.setItem('theme', 'dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+    }
   }
 
   logOut() {

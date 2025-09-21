@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { BrandsService } from '../../core/service/Brands/brands-service';
 import { Data, IBrands } from '../../Interfaces/brands/ibrands';
-import { Brandcard } from '../../shared/component/brandcard/brandcard';
+import { Brandcard } from '../brandcard/brandcard';
 
 @Component({
   selector: 'app-brands',

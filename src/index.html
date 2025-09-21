@@ -9,11 +9,22 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <!-- determines whether the system uses dark or light mode -->
   <script>
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.classList.add('dark');
+    if (localStorage.getItem('theme')) {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
     } else {
-      document.documentElement.classList.remove('dark')
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        localStorage.setItem('theme', 'dark')
+        document.documentElement.classList.add('dark');
+      } else {
+        localStorage.setItem('theme', 'light')
+        document.documentElement.classList.remove('dark')
+      }
     }
+
   </script>
 </head>
 

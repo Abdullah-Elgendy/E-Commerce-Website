@@ -1,1 +1,23 @@
-<app-category-slider></app-category-slider>
+<!-- categories grid -->
+<div class="w-[80%] mx-auto">
+    <h2 class="text-3xl font-bold text-center py-4">Categories</h2>
+    <div class="grid grid-cols-12 gap-8 p-2">
+        @for (category of categoriesData(); track $index) {
+        <app-categorycard (categoryId)="getSubcategories($event)"
+            class="col-span-12  md:col-span-6  lg:col-span-4  xl:col-span-3"
+            [categoryData]="category"></app-categorycard>
+        }@empty {
+        <p class="col-span-12 my-12"> No Results.. </p>
+        }
+    </div>
+    @if(subCategoriesData().length !== 0){
+    <h2 class="text-3xl font-bold text-center py-4">{{categoryName}}'s Sub-Categories</h2>
+    <div class="grid grid-cols-12 gap-8 p-2">
+        @for (subcategory of subCategoriesData(); track $index) {
+        <div
+            class="cursor-pointer text-center px-2 py-4 rounded shadow outline outline-gray-200 bg-gray-100 dark:bg-darker-700 dark:outline-dark dark:shadow-none hover:outline hover:outline-main/70 transition-color duration-200 col-span-12  md:col-span-6  lg:col-span-4  xl:col-span-3">
+            {{subcategory.name}}</div>
+        }
+    </div>
+    }
+</div>

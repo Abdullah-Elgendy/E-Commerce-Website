@@ -9,15 +9,15 @@ import {
   ViewChild,
   WritableSignal,
 } from '@angular/core';
-import { Data } from '../../../Interfaces/brands/ibrands';
-import { BrandsService } from '../../../core/service/Brands/brands-service';
-import { FlowbiteService } from '../../../core/service/Flowbite/flowbite-service';
+import { Data } from '../../Interfaces/brands/ibrands';
+import { BrandsService } from '../../core/service/Brands/brands-service';
+
 import { Modal } from 'flowbite';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-brandcard',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './brandcard.html',
   styleUrl: './brandcard.scss',
 })

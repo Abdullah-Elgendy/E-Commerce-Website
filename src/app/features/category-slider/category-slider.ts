@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { Data, Icategories } from '../../Interfaces/categories/icategories';
+import { DataC, Icategories } from '../../Interfaces/categories/icategories';
 import { CategoriesService } from '../../core/service/Categories/categories-service';
 
 @Component({
@@ -18,7 +18,7 @@ import { CategoriesService } from '../../core/service/Categories/categories-serv
   styleUrl: './category-slider.scss',
 })
 export class CategorySlider {
-  slideData: WritableSignal<Data[]> = signal([]);
+  slideData: WritableSignal<DataC[]> = signal([]);
   private s_categories = inject(CategoriesService);
   getData() {
     this.s_categories.getCategories().subscribe({

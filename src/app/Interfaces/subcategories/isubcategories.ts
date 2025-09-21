@@ -1,21 +1,16 @@
 import { Metadata } from '../products/iproducts';
 
-export interface Icategories {
+export interface ISubcategories {
   results: number;
   metadata: Metadata;
-  data: DataC[];
+  data: DataSC[];
 }
 
-export interface DataC {
+export interface DataSC {
   _id: string;
   name: string;
   slug: string;
-  image: string;
+  category: string;
   createdAt: string;
   updatedAt: string;
-}
-
-export interface emittedCategory {
-  id: string;
-  name: string;
 }

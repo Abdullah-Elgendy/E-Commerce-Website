@@ -1,0 +1,11 @@
+<div (click)="sendId()"
+    class="p-6 overflow-hidden cursor-pointer rounded shadow outline outline-gray-200 bg-gray-100 dark:bg-darker-700 dark:outline-dark dark:shadow-none hover:outline hover:outline-main/70 transition-color duration-200">
+    <div class="productinfo relative flex flex-wrap flex-col gap-3">
+        <div class="info">
+            <div class="productimg rounded mb-2">
+                <img class="h-[300px] object-cover mx-auto" [src]="categoryData.image" alt="category image">
+            </div>
+            <h3 class="capitalize font-bold text-[20px] text-main">{{categoryData.name}}</h3>
+        </div>
+    </div>
+</div>
