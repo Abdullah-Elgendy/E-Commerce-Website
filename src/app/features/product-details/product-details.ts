@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   inject,
@@ -25,7 +26,7 @@ import { Wishlistservice } from '../../core/service/Wishlist/wishlistservice';
   templateUrl: './product-details.html',
   styleUrl: './product-details.scss',
 })
-export class ProductDetails implements OnInit {
+export class ProductDetails implements OnInit{
   private activated = inject(ActivatedRoute);
   private _productsAPI = inject(ProductsAPI);
   private s_cart = inject(CartService);
@@ -61,6 +62,7 @@ export class ProductDetails implements OnInit {
     this.activated.paramMap.subscribe({
       next: (paramUrl) => {
         this.productId = paramUrl.get('id');
+        this.getData(this.productId);
       },
     });
   }
@@ -104,13 +106,13 @@ export class ProductDetails implements OnInit {
     this.wishlistEl.nativeElement.classList.toggle('text-red-500');
   }
 
-  getData() {
-    this._productsAPI.getProductById(this.productId).subscribe({
+  getData(id: string | null) {
+    this._productsAPI.getProductById(id).subscribe({
       next: (res: ISpecificProduct) => {
         this.productData.set(res.data);
       },
-      error: (error: any) => {
-        console.log(error);
+      error: (err) => {
+        console.log(err);
       },
     });
   }
@@ -137,7 +139,6 @@ export class ProductDetails implements OnInit {
 
   ngOnInit(): void {
     this.getProductID();
-    this.getData();
     this.getList();
   }
 }

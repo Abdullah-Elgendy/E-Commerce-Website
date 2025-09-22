@@ -115,21 +115,21 @@
                         <div
                             class="btnGroup flex flex-col flex-wrap divide-y divide-gray-200 border-y border-gray-200 dark:divide-dark dark:border-dark">
                             <button [routerLink]="['/checkout', _cartId]" [disabled]="totalPrice === 0 ? true : false"
-                                class="cursor-pointer text-gray-600 hover:bg-main hover:text-white transition-colors duration-200 focus:ring-4 focus:outline-none focus:ring-main font-medium text-sm px-5 py-2.5 text-center dark:text-white disabled:text-gray-500/70 dark:disabled:text-gray-500 disabled:hover:bg-transparent"><i
+                                class="cursor-pointer text-gray-600 focus:bg-main focus:text-white hover:bg-main hover:text-white transition-colors duration-200 focus:outline-none focus:ring-main font-medium text-sm px-5 py-2.5 text-center dark:text-white disabled:text-gray-500/70 dark:disabled:text-gray-500 disabled:hover:bg-transparent"><i
                                     class="fa-regular fa-credit-card fa-2xl me-1"></i>Card
                                 Pay</button>
                             <button [routerLink]="['/cashorder', _cartId]" [disabled]="totalPrice === 0 ? true : false"
-                                class="cursor-pointer text-gray-600 hover:bg-main hover:text-white transition-colors duration-200 focus:ring-4 focus:outline-none focus:ring-main font-medium text-sm px-5 py-2.5 text-center dark:text-white disabled:text-gray-500/70 dark:disabled:text-gray-500 disabled:hover:bg-transparent"><i
+                                class="cursor-pointer text-gray-600 focus:bg-main focus:text-white hover:bg-main hover:text-white transition-colors duration-200 focus:outline-none focus:ring-main font-medium text-sm px-5 py-2.5 text-center dark:text-white disabled:text-gray-500/70 dark:disabled:text-gray-500 disabled:hover:bg-transparent"><i
                                     class="fa-solid fa-money-bill fa-2xl me-1"></i>Cash
                                 Pay</button>
                             <button [routerLink]="['/wishlist']"
-                                class="cursor-pointer text-gray-600 hover:bg-main hover:text-white transition-colors duration-200 focus:ring-4 focus:outline-none focus:ring-main font-medium text-sm px-5 py-2.5 text-center dark:text-white"><i
+                                class="cursor-pointer text-gray-600 focus:bg-main focus:text-white hover:bg-main hover:text-white transition-colors duration-200 focus:outline-none focus:ring-main font-medium text-sm px-5 py-2.5 text-center dark:text-white"><i
                                     class="fa-solid fa-heart fa-2xl me-1"></i>Wishlist</button>
                             <button [routerLink]="['/allorders']"
-                                class="cursor-pointer text-gray-600 hover:bg-main hover:text-white transition-colors duration-200 focus:ring-4 focus:outline-none focus:ring-main font-medium text-sm px-5 py-2.5 text-center dark:text-white"><i
+                                class="cursor-pointer text-gray-600 focus:bg-main focus:text-white hover:bg-main hover:text-white transition-colors duration-200 focus:outline-none focus:ring-main font-medium text-sm px-5 py-2.5 text-center dark:text-white"><i
                                     class="fa-solid fa-clipboard-list fa-2xl me-1"></i>All Orders</button>
                             <button (click)="clearCartProducts()" [disabled]="totalPrice === 0 ? true : false"
-                                class="cursor-pointer text-gray-600 hover:bg-red-400 hover:text-white transition-colors duration-200 focus:ring-4 focus:outline-none focus:ring-red-400 font-medium text-sm px-5 py-2.5 text-center dark:text-white disabled:text-gray-500/70 dark:disabled:text-gray-500 disabled:hover:bg-transparent"><i
+                                class="cursor-pointer text-gray-600 focus:bg-red-400 focus:text-white hover:bg-red-400 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-red-400 font-medium text-sm px-5 py-2.5 text-center dark:text-white disabled:text-gray-500/70 dark:disabled:text-gray-500 disabled:hover:bg-transparent"><i
                                     class="fa-solid fa-trash fa-2xl me-1"></i>Clear
                                 Cart</button>
                         </div>

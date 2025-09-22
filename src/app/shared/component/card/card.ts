@@ -54,6 +54,9 @@ export class Card implements OnChanges {
       this.s_wishlist.addProductToWishlist(id).subscribe({
         next: (res) => {
           this.s_toast.success(res.message, 'Success');
+          this.wishlistEl.nativeElement.classList.toggle('fa-solid');
+          this.wishlistEl.nativeElement.classList.toggle('fa-regular');
+          this.wishlistEl.nativeElement.classList.toggle('text-red-500');
           this.favorite = true;
         },
       });
@@ -64,13 +67,13 @@ export class Card implements OnChanges {
             'Product removed successfully from your wishlist',
             'Success'
           );
+          this.wishlistEl.nativeElement.classList.toggle('fa-solid');
+          this.wishlistEl.nativeElement.classList.toggle('fa-regular');
+          this.wishlistEl.nativeElement.classList.toggle('text-red-500');
           this.favorite = false;
         },
       });
     }
-    this.wishlistEl.nativeElement.classList.toggle('fa-solid');
-    this.wishlistEl.nativeElement.classList.toggle('fa-regular');
-    this.wishlistEl.nativeElement.classList.toggle('text-red-500');
   }
 
   ngOnChanges(changes: SimpleChanges): void {

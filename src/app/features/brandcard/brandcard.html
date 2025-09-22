@@ -21,7 +21,7 @@
                 class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
 
                 <button type="button" (click)="closeModal()"
-                    class="text-gray-400 cursor-pointer bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    class="text-gray-400 cursor-pointer bg-transparent focus:bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:focus:bg-gray-600 dark:hover:bg-gray-600 dark:hover:text-white"
                     data-modal-hide="brand-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
@@ -50,10 +50,10 @@
             <!-- Modal footer -->
             <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                 <button type="button" (click)="browseProducts()"
-                    class="cursor-pointer bg-transparent hover:bg-main-800 outline outline-main font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-main-600 hover:bg-main hover:text-white dark:focus:ring-main-800 transition-all duration-200">Browse
+                    class="cursor-pointer bg-transparent focus:bg-main hover:bg-main outline outline-main font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-main-600 hover:text-white dark:focus:ring-main-800 transition-all duration-200">Browse
                     Products</button>
                 <button type="button" (click)="closeModal()"
-                    class="py-2.5 px-5 ms-3 text-sm font-medium cursor-pointer hover:bg-main-800 rounded-lg text-center dark:bg-main-600 bg-gray-600 hover:bg-gray-500 text-white dark:focus:ring-main-800 transition-all duration-200">Close</button>
+                    class="py-2.5 px-5 ms-3 text-sm font-medium cursor-pointer focus:bg-gray-500 rounded-lg text-center dark:bg-main-600 bg-gray-600 hover:bg-gray-500 text-white dark:focus:ring-main-800 transition-all duration-200">Close</button>
             </div>
         </div>
     </div>
